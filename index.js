@@ -15,4 +15,12 @@ async function main () {
   }
 }
 
+process.on('unhandledRejection', (error) => {
+  logger.fatal(`UnhandledRejection: Error.\n${error.name}: ${error.message}\nStack: ${error.stack}`)
+})
+
+process.on('uncaughtException', (error) => {
+  logger.fatal(`UnhandledRejection: Error.\n${error.name}: ${error.message}\nStack: ${error.stack}`)
+})
+
 main()

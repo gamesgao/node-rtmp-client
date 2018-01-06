@@ -7,6 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "https://github.com/gamesgao/node-rtmp-client.git",
   "author": "Yu Gao",
   "license": "ISC",
   "dependencies": {

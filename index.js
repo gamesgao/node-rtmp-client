@@ -9,13 +9,8 @@ async function main () {
   let fileList = fs.readdirSync(config.path)
   while (true) {
     logger.info(`Starting the loop of the path ${config.path}`)
-    let temp = 1
     for (let fileName of fileList) {
-      temp = -temp
-      rtmpClient.push(path.join(config.path, fileName))
-      if (temp === 1) {
-        await rtmpClient.push(path.join(config.path, fileName))
-      }
+      await rtmpClient.push(path.join(config.path, fileName))
     }
   }
 }

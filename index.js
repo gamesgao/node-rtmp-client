@@ -10,7 +10,11 @@ async function main () {
   while (true) {
     logger.info(`Starting the loop of the path ${config.path}`)
     for (let fileName of fileList) {
-      await rtmpClient.push(path.join(config.path, fileName))
+      try {
+        await rtmpClient.push(path.join(config.path, fileName))
+      } catch (error) {
+        logger.error(`Pushing the video ${fileName} failed`)
+      }
     }
   }
 }

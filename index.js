@@ -10,12 +10,9 @@ async function main () {
   while (true) {
     logger.info(`Starting the loop of the path ${config.path}`)
     for (let fileName of fileList) {
-      try {
-        await rtmpClient.push(path.join(config.path, fileName))
-      } catch (error) {
-        logger.error(`Pushing file ${fileName} Error!`)
-      }
+      rtmpClient.add(path.join(config.path, fileName))
     }
+    await rtmpClient.push()
   }
 }
 

@@ -6,15 +6,14 @@ const RTMPClient = require('./lib/RTMPClient')
 
 async function main () {
   let rtmpClient = new RTMPClient(config.url, config.key)
-  let fileList = fs.readdirSync(config.path)
   while (true) {
     logger.info(`Starting the loop of the path ${config.path}`)
-    for (let fileName of fileList) {
-      try {
-        await rtmpClient.push(path.join(config.path, fileName))
-      } catch (error) {
-        logger.error(`Pushing the video ${fileName} failed`)
-      }
+    try {
+      await rtmpClient.pushFolder(config.path)
+      // await rtmpClient.push(path.join(config.path, fileName))
+    } catch (error) {
+      logger.error(`Pushing the video ${config.path} failed`)
+      logger.error(error)
     }
   }
 }

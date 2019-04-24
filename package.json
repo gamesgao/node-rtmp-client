@@ -11,8 +11,8 @@
   "author": "Yu Gao",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.16.0",
+    "commander": "^2.20.0",
     "fluent-ffmpeg": "^2.1.2",
-    "log4js": "^3.0.2"
+    "log4js": "^4.1.0"
   }
 }

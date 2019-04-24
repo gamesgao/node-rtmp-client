@@ -58,3 +58,5 @@ typings/
 .env
 
 temp
+
+package-lock.json

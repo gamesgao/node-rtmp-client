@@ -4,30 +4,20 @@ const logger = require('./lib/logger')('main')
 const config = require('./lib/config')
 const RTMPClient = require('./lib/RTMPClient')
 
-const MaxErrorCount = 100
-
 async function main () {
-  let rtmpClient = new RTMPClient(config.url, config.key)
+  let rtmpClient = new RTMPClient(config.url)
   let fileList = fs.readdirSync(config.path)
 
-  let errorCount = 0
-
   logger.info(`Starting the loop of the path ${config.path}`)
-  while (errorCount <= MaxErrorCount) {
-    let fileName = sample(fileList)
+  for (let fileName of fileList) {
     try {
-      await rtmpClient.copy(path.join(config.path, fileName))
-      errorCount = 0
+      rtmpClient.streamKey = `${path.parse(fileName).name}.flv`
+      await rtmpClient.push(path.join(config.path, fileName))
     } catch (error) {
       logger.error(`Pushing the video ${path.join(config.path, fileName)} failed`)
       logger.error(error)
-      errorCount += 1
     }
   }
-}
-
-function sample (array) {
-  return array[Math.floor(Math.random() * array.length)]
 }
 
 process.on('unhandledRejection', (error) => {
